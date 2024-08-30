@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, IconButton, TextField } from '@mui/material';
+import { Box, IconButton, TextField, Tooltip } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useThreadContext } from '../../hooks/Context';
 import styled from '@emotion/styled';
@@ -89,7 +89,9 @@ export const ChatTextInput = () => {
                 }}
             />
             <IconButton onClick={handleSubmitMessage} sx={{ marginLeft: '8px' }}>
-                <SendButton />
+                <Tooltip title="Click to send!">
+                    <SendButton />
+                </Tooltip>
             </IconButton>
         </Box>
     );

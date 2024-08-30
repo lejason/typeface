@@ -31,3 +31,19 @@ export const User4: User = {
     profileImage: '../../public/profile.png',
     created: 1724969101
 }
+
+export const User5: User = {
+    userID: 'user5',
+    firstName: 'Buster',
+    lastName: 'Bluth',
+    profileImage: '../../public/profile.png',
+    created: 1724969101
+}
+
+export const User6: User = {
+    userID: 'user6',
+    firstName: 'Lindsey',
+    lastName: 'Bluth',
+    profileImage: '../../public/profile.png',
+    created: 1724969101
+}

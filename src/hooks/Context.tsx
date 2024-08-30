@@ -5,6 +5,7 @@ import { User1 } from './DummyUsers';
 
 interface ThreadContextProps {
     threads: Thread[];
+    users: User[];
     selectedThread: Thread | null;
     setSelectedThread: (thread: Thread) => void;
     submitMessage: (threadID: string, message: string) => void;
@@ -18,10 +19,12 @@ interface ThreadProviderProps {
     threads: Thread[];
     children: ReactNode;
     selectedThread: Thread | null;
+    users: User[];
 }
 
 const ThreadContext = createContext<ThreadContextProps>({
     threads: [],
+    users: [],
     selectedThread: null,
     setSelectedThread: () => { },
     submitMessage: () => { },
@@ -33,7 +36,7 @@ const ThreadContext = createContext<ThreadContextProps>({
 
 export const useThreadContext = () => useContext(ThreadContext);
 
-export const ThreadProvider: React.FC<ThreadProviderProps> = ({ threads: initialThreads, children }) => {
+export const ThreadProvider: React.FC<ThreadProviderProps> = ({ threads: initialThreads, users, children }) => {
 
     const [threads, setThreads] = useState<Thread[]>(() => {
         const savedThreads = localStorage.getItem('threads');
@@ -63,7 +66,7 @@ export const ThreadProvider: React.FC<ThreadProviderProps> = ({ threads: initial
     const startThread = (user: User) => {
         const newThread: Thread = {
             threadID: `thread-${Date.now()}`,
-            users: [CURRENT_USER, user],
+            users: [user],
             unread: false,
             messages: [],
         };
@@ -139,7 +142,7 @@ export const ThreadProvider: React.FC<ThreadProviderProps> = ({ threads: initial
     };
 
     return (
-        <ThreadContext.Provider value={{ threads, selectedThread, setSelectedThread, submitMessage, deleteMessage, createNewThread, startThread, deleteThread }}>
+        <ThreadContext.Provider value={{ threads, users, selectedThread, setSelectedThread, submitMessage, deleteMessage, createNewThread, startThread, deleteThread }}>
             {children}
         </ThreadContext.Provider>
     );

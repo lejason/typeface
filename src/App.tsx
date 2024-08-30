@@ -7,6 +7,8 @@ import { Thread1, Thread2, Thread3 } from './hooks/DummyThread';
 import { ChatContainer } from './components/ChatWindow/ChatContainer';
 import { backgroundThreads, backgroundWindow, borders } from './constants/colors';
 import { ThreadProvider } from './hooks/Context';
+import { User } from './types/User';
+import { User2, User3, User4, User5, User6 } from './hooks/DummyUsers';
 
 export const Container = styled.div`
   display: flex;
@@ -51,9 +53,13 @@ function App() {
     Thread3
   ];
 
+  const InitUsers: User[] = [
+    User2, User3, User4, User5, User6
+  ]
+
   return (
     <div className="App">
-      <ThreadProvider threads={InitThreads} selectedThread={InitThreads[0]}>
+      <ThreadProvider users={InitUsers} threads={InitThreads} selectedThread={InitThreads[0]}>
         <Container>
           <ThreadContainer>
             <ThreadList />

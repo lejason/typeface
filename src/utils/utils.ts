@@ -43,4 +43,7 @@ export const getUniqueUsersSortedByFirstName = (threads: Thread[]): User[] => {
     return Object.values(userMap).sort((a, b) => a.firstName.localeCompare(b.firstName));
 }
 
+export const sortUsersAlphabetically = (users: User[]): User[] => {
+    return users.sort((a, b) => a.firstName.localeCompare(b.firstName));
+};
 

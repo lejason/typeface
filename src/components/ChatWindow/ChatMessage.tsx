@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { getTimeOfDay, getUserDislpayName } from '../../utils/utils';
 import styled from '@emotion/styled';
 import { Message } from '../../types/Message';
 import { text_primary, text_secondary, text_accent } from '../../constants/colors';
 import { useThreadContext } from '../../hooks/Context';
+import { Confirm } from '../Dialog/Confirm';
 
 interface ChatMessageProps {
     parentThreadID: string;
@@ -21,6 +22,9 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
         display: flex;
         width: 100%;
         flex-direction: column;
+        &:hover .delete-icon {
+            visibility: visible;
+        }
     `;
 
     const Header = styled(Box)`
@@ -58,6 +62,7 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
     const DeleteButtonContainer = styled(IconButton)`
         position: absolute;
         right:0;
+        visibility: hidden;
     `;
 
     const DeleteButton = styled(ClearIcon)`
@@ -81,11 +86,15 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
             <Header>
                 <UserName>{getUserDislpayName(message.fromUser)}</UserName>
                 <Timestamp>{getTimeOfDay(message.sent)}</Timestamp>
-                <DeleteButtonContainer onClick={handleClickDelete} className="delete-icon">
-                    <DeleteButton />
-                </DeleteButtonContainer>
+                <Confirm onConfirm={handleClickDelete} message="Are you sure you want to delete this message?">
+                    <DeleteButtonContainer className="delete-icon">
+                        <Tooltip title="Delete Message">
+                            <DeleteButton />
+                        </Tooltip>
+                    </DeleteButtonContainer>
+                </Confirm>
             </Header>
             <Body>{message.body}</Body>
-        </Container>
+        </Container >
     );
 };

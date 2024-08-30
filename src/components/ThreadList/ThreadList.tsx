@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { List, ListItem, Typography, IconButton, Menu, MenuItem, Box } from '@mui/material';
-import { getThreadUsersDisplayName, getUniqueUsersSortedByFirstName, getUserDislpayName } from '../../utils/utils';
+import { List, ListItem, Typography, IconButton, Menu, MenuItem, Box, Tooltip } from '@mui/material';
+import { getThreadUsersDisplayName, getUniqueUsersSortedByFirstName, getUserDislpayName, sortUsersAlphabetically } from '../../utils/utils';
 import { text_primary } from '../../constants/colors';
 import styled from '@emotion/styled';
 import { useThreadContext } from '../../hooks/Context';
 import { Thread } from '../../types/Message';
 import { AddBox, Clear } from '@mui/icons-material';
 import { User } from '../../types/User';
+import { Confirm } from '../Dialog/Confirm';
 
 const Item = styled(Typography)`
   color: ${text_primary};
@@ -65,7 +66,7 @@ const ClearButton = styled(Clear)`
 `
 
 export const ThreadList = () => {
-  const { threads, selectedThread, setSelectedThread, startThread, deleteThread } = useThreadContext();
+  const { threads, users, selectedThread, setSelectedThread, startThread, deleteThread } = useThreadContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (thread: Thread) => {
@@ -91,7 +92,7 @@ export const ThreadList = () => {
     deleteThread(threadID);
   };
 
-  const uniqueUsers = useMemo(() => getUniqueUsersSortedByFirstName(threads), [threads]);
+  const uniqueUsers = useMemo(() => sortUsersAlphabetically(users), [users]);
 
   return (
     <Container>
@@ -107,9 +108,19 @@ export const ThreadList = () => {
             >
               {getThreadUsersDisplayName(thread)}
             </Item>
-            <ClearButtonContainer className="clear-icon" onClick={() => handleClearClick(thread.threadID)}>
-              <ClearButton />
+
+
+            <ClearButtonContainer className="clear-icon">
+              <Confirm
+                onConfirm={() => handleClearClick(thread.threadID)}
+                message="Are you sure you want to delete this entire thread?">
+                <Tooltip title="Delete Thread">
+                  <ClearButton />
+                </Tooltip>
+              </Confirm>
             </ClearButtonContainer>
+
+
           </ListItemContainer>
         ))}
       </List>
@@ -117,7 +128,9 @@ export const ThreadList = () => {
       {/* Add Button */}
       <AddButtonContainer>
         <IconButton onClick={handleAddClick}>
-          <AddButton />
+          <Tooltip title="Start a new chat">
+            <AddButton />
+          </Tooltip>
         </IconButton>
         <Menu
           anchorEl={anchorEl}
