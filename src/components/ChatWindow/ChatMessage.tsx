@@ -1,20 +1,26 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 import { getTimeOfDay, getUserDislpayName } from '../../utils/utils';
 import styled from '@emotion/styled';
 import { Message } from '../../types/Message';
 import { text_primary, text_secondary, text_accent } from '../../constants/colors';
+import { useThreadContext } from '../../hooks/Context';
 
 interface ChatMessageProps {
-    message: Message
+    parentThreadID: string;
+    message: Message;
+    messageIndex: number;
 }
-export const ChatMessage = ({ message }: ChatMessageProps) => {
+
+export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessageProps) => {
+
     const Container = styled(Box)`
-    padding: 0  0 1rem 0;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
+        padding: 0 0 1rem 0;
+        margin: 0;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
     `;
 
     const Header = styled(Box)`
@@ -23,6 +29,7 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
         align-items: center;
         flex: 1;
         width: 100%;
+        position: relative;
     `;
 
     const UserName = styled(Box)`
@@ -30,31 +37,55 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
         flex-shrink: 1;
         width: auto;
         color: ${text_secondary};
-        font-size:.7rem;
+        font-size: .7rem;
         font-weight: bold;
     `;
 
     const Timestamp = styled(Box)`
         display: flex;
-        font-size:.6rem;
+        font-size: .6rem;
         margin-left: .25rem;
         text-decoration: italic;
         color: ${text_accent};
     `;
 
     const Body = styled(Box)`
-    padding: .5rem 0;
-    font-size: 1.1rem;
-    color: ${text_primary}
+        padding: .5rem 0;
+        font-size: 1.1rem;
+        color: ${text_primary};
     `;
+
+    const DeleteButtonContainer = styled(IconButton)`
+        position: absolute;
+        right:0;
+    `;
+
+    const DeleteButton = styled(ClearIcon)`
+        color: #999;
+        cursor: pointer;
+        font-size: 18px;
+        &:hover {
+            color:#eee;
+        }
+    `;
+
+    const { deleteMessage } = useThreadContext();
+
+    const handleClickDelete = () => {
+        console.log("deleteing")
+        deleteMessage(parentThreadID, messageIndex)
+    }
 
     return (
         <Container>
             <Header>
                 <UserName>{getUserDislpayName(message.fromUser)}</UserName>
                 <Timestamp>{getTimeOfDay(message.sent)}</Timestamp>
+                <DeleteButtonContainer onClick={handleClickDelete} className="delete-icon">
+                    <DeleteButton />
+                </DeleteButtonContainer>
             </Header>
             <Body>{message.body}</Body>
         </Container>
-    )
-}
+    );
+};

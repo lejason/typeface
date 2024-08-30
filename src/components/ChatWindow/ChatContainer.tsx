@@ -15,8 +15,9 @@ const BodyContainer = styled(Box)`
     overflow-y: auto;`;
 
 const InputContainer = styled(Box)`
-    flex - shrink: 0;
-    height: auto;`;
+    flex-shrink: 0;
+    height: auto;
+    margin-bottom: .5rem;`;
 
 
 export const ChatContainer = () => {

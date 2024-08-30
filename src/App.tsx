@@ -37,15 +37,15 @@ export const ChatWindowContainer = styled(Box)`
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem 1rem 2rem;
   box-sizing: border-box;
   background-color: ${backgroundWindow}
 `
 
 function App() {
 
-  // Assume this is from a hook
-  const threads: Thread[] = [
+  // Assume this is hydrated from a hook/API, etc.
+  const InitThreads: Thread[] = [
     Thread1,
     Thread2,
     Thread3
@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      <ThreadProvider threads={threads} selectedThread={threads[0]}>
+      <ThreadProvider threads={InitThreads} selectedThread={InitThreads[0]}>
         <Container>
           <ThreadContainer>
             <ThreadList />

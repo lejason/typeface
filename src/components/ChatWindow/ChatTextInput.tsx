@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Box, TextField } from '@mui/material';
+import { Box, IconButton, TextField } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 import { useThreadContext } from '../../hooks/Context';
+import styled from '@emotion/styled';
+
 
 export const ChatTextInput = () => {
     const [text, setText] = useState('');
@@ -13,7 +16,6 @@ export const ChatTextInput = () => {
             setText('');
         }
     }
-
     // Adding this for more intuative usability
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' && text.trim() !== '') {
@@ -38,14 +40,23 @@ export const ChatTextInput = () => {
         }
     };
 
+    const SendButton = styled(SendIcon)`
+        font-size: 42px;
+        color: #aaa;
+        transition: color 0.2s ease, transform 0.2s ease;
+        &:hover {
+            color: #444;
+            transform: scale(1.1);
+        }
+        `;
+
     return (
         <Box
             sx={{
                 display: 'flex',
                 alignSelf: 'flex-end',
                 alignItems: 'center',
-                padding: '8px',
-                border: '1px solid yellow',
+                marginButton: '1rem',
                 backgroundColor: '#e0e0e0',
                 transition: 'all 0.3s ease',
             }}
@@ -60,7 +71,6 @@ export const ChatTextInput = () => {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyPress}
                 placeholder="Type a message..."
-                variant="outlined"
                 sx={{
                     '& .MuiOutlinedInput-root': {
                         padding: '8px',
@@ -78,6 +88,9 @@ export const ChatTextInput = () => {
                     },
                 }}
             />
+            <IconButton onClick={handleSubmitMessage} sx={{ marginLeft: '8px' }}>
+                <SendButton />
+            </IconButton>
         </Box>
     );
 };

@@ -15,7 +15,7 @@ export const ChatWindow = () => {
   return <List>
     {selectedThread.messages.map((message, index) => (
       <ListItem key={index} sx={{ padding: 0, magin: 0 }}>
-        <ChatMessage message={message} />
+        <ChatMessage message={message} parentThreadID={selectedThread.threadID} messageIndex={index} />
       </ListItem>
     ))}
   </List >

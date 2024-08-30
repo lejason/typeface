@@ -30,3 +30,17 @@ export const getTimeOfDay = (unixTimestamp: number) => {
 
     return `${hours}:${minutesStr}${ampm}`;
 }
+
+export const getUniqueUsersSortedByFirstName = (threads: Thread[]): User[] => {
+    const userMap: { [key: string]: User } = {};
+    threads.forEach(thread => {
+        thread.users.forEach(user => {
+            if (!userMap[user.userID]) {
+                userMap[user.userID] = user;
+            }
+        });
+    });
+    return Object.values(userMap).sort((a, b) => a.firstName.localeCompare(b.firstName));
+}
+
+
