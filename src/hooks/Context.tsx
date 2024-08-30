@@ -64,6 +64,7 @@ export const ThreadProvider: React.FC<ThreadProviderProps> = ({ threads: initial
     const CURRENT_USER = User1;
 
     const startThread = (user: User) => {
+
         const newThread: Thread = {
             threadID: `thread-${Date.now()}`,
             users: [user],
