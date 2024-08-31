@@ -1,6 +1,22 @@
-export const text_primary = '#e0e0e0';
-export const text_secondary = '#bbb';
-export const text_accent = '#777';
-export const backgroundThreads = '#2d2c2c';
-export const backgroundWindow = '#303030';
-export const borders = '#292929';
+export const COLORS = {
+    text: {
+        primary: '#e0e0e0',
+        secondary: '#bbb',
+        accent: '#777',
+        dark: '#1f1f1f'
+    },
+    background: {
+        dark: '#333',
+        light: '#e0e0e0',
+        viewThreads: '#2d2c2c',
+        viewChatWindow: '#303030',
+    },
+    icon: {
+        primary: '#444',
+        light: '#eee',
+        medium: '#999'
+    },
+    borders: {
+        primary: '#292929'
+    }
+}

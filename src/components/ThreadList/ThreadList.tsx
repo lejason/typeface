@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { List, ListItem, Typography, IconButton, Menu, MenuItem, Box, Tooltip } from '@mui/material';
-import { getThreadUsersDisplayName, getUniqueUsersSortedByFirstName, getUserDislpayName, sortUsersAlphabetically } from '../../utils/utils';
-import { text_primary } from '../../constants/colors';
+import { List, Typography, IconButton, Menu, MenuItem, Box, Tooltip } from '@mui/material';
+import { getThreadUsersDisplayName, getUserDislpayName, sortUsersAlphabetically } from '../../utils/utils';
+import { COLORS } from '../../constants/colors';
 import styled from '@emotion/styled';
 import { useThreadContext } from '../../hooks/Context';
 import { Thread } from '../../types/Message';
@@ -10,7 +10,7 @@ import { User } from '../../types/User';
 import { Confirm } from '../Dialog/Confirm';
 
 const Item = styled(Typography)`
-  color: ${text_primary};
+  color: ${COLORS.text.primary};
   font-size: 0.9rem;
   padding: 1rem;
   width: 100%;
@@ -31,7 +31,7 @@ const AddButtonContainer = styled(Box)`
 `;
 
 const AddButton = styled(AddBox)`
-  color: #eee;
+  color: ${COLORS.icon.light};
   font-size: 42px;
   cursor: pointer;
 `;
@@ -39,7 +39,7 @@ const AddButton = styled(AddBox)`
 const UserMenuHeader = styled(Typography)`
   font-size: 14px;
   width: 180px;
-  color: #111;
+  color: ${COLORS.text.dark}
 `;
 
 const ListItemContainer = styled(Box)`
@@ -62,7 +62,7 @@ const ClearButtonContainer = styled(IconButton)`
 const ClearButton = styled(Clear)`
   cursor: pointer;
   font-size: 24px;
-  color: #eee;
+  color: ${COLORS.icon.light};
 `
 
 export const ThreadList = () => {
@@ -102,7 +102,7 @@ export const ThreadList = () => {
             <Item
               sx={{
                 fontWeight: thread.threadID === selectedThread?.threadID ? 'bold' : 'light',
-                background: thread.threadID === selectedThread?.threadID ? '#444' : '',
+                background: thread.threadID === selectedThread?.threadID ? COLORS.icon.primary : '',
               }}
               onClick={() => handleClick(thread)}
             >

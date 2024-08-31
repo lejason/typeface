@@ -3,6 +3,7 @@ import { Box, IconButton, TextField, Tooltip } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useThreadContext } from '../../hooks/Context';
 import styled from '@emotion/styled';
+import { COLORS } from '../../constants/colors';
 
 
 export const ChatTextInput = () => {
@@ -42,10 +43,11 @@ export const ChatTextInput = () => {
 
     const SendButton = styled(SendIcon)`
         font-size: 42px;
-        color: #aaa;
+        color: ${COLORS.icon.medium};
         transition: color 0.2s ease, transform 0.2s ease;
+        
         &:hover {
-            color: #444;
+            color: ${COLORS.icon.primary}
             transform: scale(1.1);
         }
         `;
@@ -57,7 +59,7 @@ export const ChatTextInput = () => {
                 alignSelf: 'flex-end',
                 alignItems: 'center',
                 marginButton: '1rem',
-                backgroundColor: '#e0e0e0',
+                backgroundColor: COLORS.background.light,
                 transition: 'all 0.3s ease',
             }}
         >
@@ -77,13 +79,13 @@ export const ChatTextInput = () => {
                         fontSize: '16px',
                         borderRadius: '8px',
                         '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#e0e0e0',
+                            borderColor: COLORS.background.light,
                         },
                         '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#e0e0e0',
+                            borderColor: COLORS.background.light,
                         },
                         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#e0e0e0',
+                            borderColor: COLORS.background.light,
                         },
                     },
                 }}

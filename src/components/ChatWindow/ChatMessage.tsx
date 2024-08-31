@@ -4,7 +4,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { getTimeOfDay, getUserDislpayName } from '../../utils/utils';
 import styled from '@emotion/styled';
 import { Message } from '../../types/Message';
-import { text_primary, text_secondary, text_accent } from '../../constants/colors';
+import { COLORS } from '../../constants/colors';
 import { useThreadContext } from '../../hooks/Context';
 import { Confirm } from '../Dialog/Confirm';
 
@@ -40,7 +40,7 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
         display: flex;
         flex-shrink: 1;
         width: auto;
-        color: ${text_secondary};
+        color: ${COLORS.text.secondary};
         font-size: .7rem;
         font-weight: bold;
     `;
@@ -50,13 +50,13 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
         font-size: .6rem;
         margin-left: .25rem;
         text-decoration: italic;
-        color: ${text_accent};
+        color: ${COLORS.text.accent};
     `;
 
     const Body = styled(Box)`
         padding: .5rem 0;
         font-size: 1.1rem;
-        color: ${text_primary};
+        color: ${COLORS.text.primary};
     `;
 
     const DeleteButtonContainer = styled(IconButton)`
@@ -66,11 +66,11 @@ export const ChatMessage = ({ parentThreadID, message, messageIndex }: ChatMessa
     `;
 
     const DeleteButton = styled(ClearIcon)`
-        color: #999;
+        color: ${COLORS.icon.medium};
         cursor: pointer;
         font-size: 18px;
         &:hover {
-            color:#eee;
+            color:${COLORS.icon.light};
         }
     `;
 

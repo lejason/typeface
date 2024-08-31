@@ -5,7 +5,7 @@ import { ThreadList } from './components/ThreadList/ThreadList';
 import { Thread } from './types/Message';
 import { Thread1, Thread2, Thread3 } from './hooks/DummyThread';
 import { ChatContainer } from './components/ChatWindow/ChatContainer';
-import { backgroundThreads, backgroundWindow, borders } from './constants/colors';
+import { COLORS } from './constants/colors';
 import { ThreadProvider } from './hooks/Context';
 import { User } from './types/User';
 import { User2, User3, User4, User5, User6 } from './hooks/DummyUsers';
@@ -20,7 +20,7 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f0f2f5;
+  background-color: ${COLORS.background.dark}
 `;
 
 export const ThreadContainer = styled(Box)`
@@ -30,8 +30,8 @@ export const ThreadContainer = styled(Box)`
   padding: 0;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: ${backgroundThreads};
-  border-right: 1px solid ${borders};
+  background-color: ${COLORS.background.viewThreads};
+  border-right: 1px solid ${COLORS.borders.primary};
 `
 
 export const ChatWindowContainer = styled(Box)`
@@ -41,7 +41,7 @@ export const ChatWindowContainer = styled(Box)`
   height: 100%;
   padding: 1rem 1rem 1rem 2rem;
   box-sizing: border-box;
-  background-color: ${backgroundWindow}
+  background-color: ${COLORS.background.viewChatWindow}
 `
 
 function App() {
